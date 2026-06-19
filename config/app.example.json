@@ -1,0 +1,55 @@
+{
+  "application": {
+    "name": "Asunode Local Voice Assistant",
+    "version": "0.1.0",
+    "language": "tr-TR"
+  },
+  "audio": {
+    "capture_device": "hw:CARD=YOUR_MICROPHONE,DEV=0",
+    "playback_device": "default",
+    "sample_rate": 16000,
+    "channels": 1,
+    "sample_format": "S16_LE",
+    "input_mode": "push_to_talk",
+    "max_record_seconds": 30,
+    "recordings_directory": "data/recordings"
+  },
+  "asr": {
+    "provider": "nvidia_nemo",
+    "model": "nvidia/nemotron-3.5-asr-streaming-0.6b",
+    "language": "tr-TR",
+    "device": "cpu",
+    "keep_model_loaded": true,
+    "strip_language_tags": true
+  },
+  "ollama": {
+    "base_url": "http://127.0.0.1:11434",
+    "chat_endpoint": "/api/chat",
+    "model": "gemma4:12b-it-qat",
+    "keep_alive": "30m",
+    "temperature": 0.2,
+    "request_timeout_seconds": 600
+  },
+  "tts": {
+    "enabled": true,
+    "engine": "piper",
+    "language": "tr-TR",
+    "voice": "tr_TR-dfki-medium",
+    "python_executable": ".venv-tts/bin/python",
+    "models_directory": "models/piper",
+    "output_directory": "data/tts",
+    "playback_command": "aplay",
+    "playback_device": "default",
+    "auto_play_response": true
+  },
+  "interface": {
+    "host": "127.0.0.1",
+    "port": 7860,
+    "open_browser_on_start": false,
+    "history_limit": 50
+  },
+  "logging": {
+    "directory": "logs",
+    "level": "INFO"
+  }
+}

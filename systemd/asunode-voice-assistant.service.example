@@ -1,0 +1,25 @@
+[Unit]
+Description=Asunode Local Voice Assistant
+After=network.target
+StartLimitIntervalSec=300
+StartLimitBurst=3
+
+[Service]
+Type=simple
+WorkingDirectory=__PROJECT_DIR__
+
+Environment=PYTHONUNBUFFERED=1
+Environment=TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1
+
+ExecStart=__PROJECT_DIR__/.venv/bin/python __PROJECT_DIR__/voice_assistant_ui_stage3.py
+
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=20
+KillSignal=SIGINT
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

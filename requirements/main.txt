@@ -1,0 +1,6 @@
+# Install CPU-only PyTorch and TorchAudio separately before this file.
+fastapi==0.137.2
+uvicorn==0.49.0
+pydantic==2.13.4
+soundfile==0.14.0
+nemo-toolkit[asr] @ git+https://github.com/NVIDIA/NeMo.git@main

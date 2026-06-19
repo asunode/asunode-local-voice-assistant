@@ -1,0 +1,77 @@
+# Python bytecode and tooling
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.egg-info/
+
+# Virtual environments
+.venv/
+.venv-tts/
+venv/
+env/
+
+# Local model files and caches
+models/
+*.onnx
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+.cache/
+**/.cache/
+huggingface/
+**/huggingface/
+
+# Audio, generated data, and history
+data/
+*.wav
+*.flac
+*.mp3
+
+# Runtime state, logs, and checkpoints
+logs/
+state/
+*.log
+*_install.log
+nemo_install.log
+nemo_main_install.log
+checkpoints/
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# Local configuration and credentials
+config/app.json
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*credentials*
+*token*
+*secret*
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local assistant metadata and personal notes
+.agents/
+.codex/
+websayfasi.txt
+
+# Documentation images are intentionally publishable.
+!docs/
+!docs/images/
+!docs/images/**
