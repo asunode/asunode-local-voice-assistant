@@ -22,6 +22,7 @@ import torch
 import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
+from local_commands import match_local_command
 from nemo.collections.asr.models.rnnt_bpe_models_prompt import (
     RNNTPromptTranscribeConfig,
 )
@@ -609,6 +610,15 @@ def build_ollama_messages(
 def ask_ollama_sync(
     user_text: str,
 ) -> tuple[str, float]:
+    local_started = time.perf_counter()
+    local_answer = match_local_command(user_text)
+
+    if local_answer is not None:
+        return (
+            local_answer,
+            time.perf_counter() - local_started,
+        )
+
     payload = {
         "model": OLLAMA_MODEL,
         "stream": False,
