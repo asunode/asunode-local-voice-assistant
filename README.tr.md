@@ -83,6 +83,16 @@ Bunlar tek makinedeki gözlemsel ölçümlerdir; standartlaştırılmış benchm
 15. Systemd kullanıcı servisi hazırlandı.
 16. Parlament mavisi arayüz tamamlandı.
 
+## Proje rolleri ve AI destekli geliştirme
+
+Bu proje insan–yapay zekâ iş birliğiyle geliştirilmiştir.
+
+- **Sinan Kurtoğlu — Proje sahibi ve sistem entegratörü:** proje hedeflerini belirledi, yerel donanım ve işletim ortamını hazırladı, saha testlerini gerçekleştirdi, sonuçları değerlendirdi, nihai teknik kararları verdi ve yayını onayladı.
+- **ChatGPT (GPT-5.5 Thinking) — Mimari ve teknik rehberlik:** sistem mimarisi, kurulum planı, sorun giderme, bağımlılık analizi, hata ayıklama stratejisi, teknik açıklamalar, dokümantasyon yapısı ve yayın hazırlığına katkı sağladı.
+- **VS Code DAI kodlama ajanı — Yerel uygulama desteği:** insan denetimi altında repository incelemesi, dosya düzenleme, doğrulama komutları, güvenlik kontrolleri, Git işlemleri ve GitHub yayınını gerçekleştirdi.
+
+Yapay zekâ tarafından üretilen bütün öneriler ve dosya değişiklikleri proje sahibi tarafından incelenmiş ve onaylanmıştır. Projenin kurulumu, test edilmesi ve kullanımına ilişkin sorumluluk proje sahibine ve sistemi çalıştıran kişiye aittir.
+
 ## Kurulum
 
 ### 1. Sistem paketleri

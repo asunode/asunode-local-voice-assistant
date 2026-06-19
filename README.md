@@ -85,6 +85,16 @@ These are observational measurements from one machine, not a standardized benchm
 15. Added a user-level systemd service.
 16. Completed the parliament-blue interface.
 
+## Project roles and AI-assisted development
+
+This project was developed through a human–AI collaboration.
+
+- **Sinan Kurtoğlu — Project owner and system integrator:** defined the project goals, prepared the local hardware and operating environment, performed field tests, evaluated the results, selected the final technical decisions, and approved the release.
+- **ChatGPT (GPT-5.5 Thinking) — Architecture and technical guidance:** contributed to system architecture, installation planning, troubleshooting, dependency analysis, debugging strategy, technical explanations, documentation structure, and release preparation.
+- **VS Code DAI coding agent — Local implementation assistance:** performed repository inspection, file editing, validation commands, security checks, Git operations, and GitHub publication under human supervision.
+
+All AI-generated recommendations and file changes were reviewed and accepted by the project owner. Responsibility for deployment, testing, and use of the project remains with the project owner and the person operating the system.
+
 ## Installation
 
 ### 1. System packages
