@@ -612,6 +612,7 @@ def ask_ollama_sync(
     payload = {
         "model": OLLAMA_MODEL,
         "stream": False,
+        "think": False,
         "keep_alive": OLLAMA_KEEP_ALIVE,
         "messages": build_ollama_messages(
             user_text
