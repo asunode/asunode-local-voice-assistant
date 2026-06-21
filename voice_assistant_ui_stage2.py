@@ -23,6 +23,10 @@ import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
 from local_commands import match_local_command
+from local_datetime import (
+    format_turkish_datetime,
+    get_local_now,
+)
 from nemo.collections.asr.models.rnnt_bpe_models_prompt import (
     RNNTPromptTranscribeConfig,
 )
@@ -54,6 +58,20 @@ USER_NAME = (
         and configured_user_name.strip()
     )
     else "Kullanıcı"
+)
+
+configured_timezone = user_config.get(
+    "timezone",
+    "Europe/Istanbul",
+)
+
+USER_TIMEZONE = (
+    configured_timezone.strip()
+    if (
+        isinstance(configured_timezone, str)
+        and configured_timezone.strip()
+    )
+    else "Europe/Istanbul"
 )
 
 APPLICATION_NAME = CONFIG["application"]["name"]
@@ -107,6 +125,23 @@ Kurallar:
 - Cevabı mümkün olduğunca kısa ve açık tut.
 - Bilmediğin bilgiyi uydurma.
 - Mesaj anlaşılmıyorsa kullanıcının tekrar etmesini iste.
+""".strip()
+
+
+def build_system_prompt() -> str:
+    current_time = get_local_now(USER_TIMEZONE)
+    formatted_datetime = format_turkish_datetime(current_time)
+
+    return f"""
+{SYSTEM_PROMPT}
+
+Güncel yerel tarih ve saat:
+{formatted_datetime}
+Saat dilimi: {USER_TIMEZONE}
+
+Bu bilgi işletim sisteminin saatinden anlık olarak okunmuştur.
+Tarih veya saat sorulursa bu bilgiyi kullan.
+Sistem saatine erişemediğini söyleme.
 """.strip()
 
 
@@ -597,7 +632,7 @@ def build_ollama_messages(
     messages: list[dict[str, str]] = [
         {
             "role": "system",
-            "content": SYSTEM_PROMPT,
+            "content": build_system_prompt(),
         }
     ]
 
@@ -631,7 +666,11 @@ def ask_ollama_sync(
     user_text: str,
 ) -> tuple[str, float]:
     local_started = time.perf_counter()
-    local_answer = match_local_command(user_text, USER_NAME)
+    local_answer = match_local_command(
+        user_text,
+        USER_NAME,
+        USER_TIMEZONE,
+    )
 
     if local_answer is not None:
         return (

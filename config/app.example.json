@@ -5,7 +5,8 @@
     "language": "tr-TR"
   },
   "user": {
-    "name": "Kullanıcı"
+    "name": "Kullanıcı",
+    "timezone": "Europe/Istanbul"
   },
   "audio": {
     "capture_device": "hw:CARD=YOUR_MICROPHONE,DEV=0",
