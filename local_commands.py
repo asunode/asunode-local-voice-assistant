@@ -4,9 +4,9 @@ import unicodedata
 
 
 LOCAL_COMMANDS = {
-    "gunaydin": "Günaydın Sinan. Hazırım.",
-    "iyi aksamlar": "İyi akşamlar Sinan. Buradayım.",
-    "yi aksamlar": "İyi akşamlar Sinan. Buradayım.",
+    "gunaydin": "Günaydın {user_name}. Hazırım.",
+    "iyi aksamlar": "İyi akşamlar {user_name}. Buradayım.",
+    "yi aksamlar": "İyi akşamlar {user_name}. Buradayım.",
 }
 
 
@@ -48,5 +48,13 @@ def normalize_command(text: str) -> str:
     return " ".join(words)
 
 
-def match_local_command(text: str) -> str | None:
-    return LOCAL_COMMANDS.get(normalize_command(text))
+def match_local_command(
+    text: str,
+    user_name: str,
+) -> str | None:
+    response = LOCAL_COMMANDS.get(normalize_command(text))
+
+    if response is None:
+        return None
+
+    return response.format(user_name=user_name)

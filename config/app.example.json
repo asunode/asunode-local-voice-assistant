@@ -4,6 +4,9 @@
     "version": "0.1.0",
     "language": "tr-TR"
   },
+  "user": {
+    "name": "Kullanıcı"
+  },
   "audio": {
     "capture_device": "hw:CARD=YOUR_MICROPHONE,DEV=0",
     "playback_device": "default",

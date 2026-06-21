@@ -40,6 +40,22 @@ def load_config() -> dict[str, Any]:
 
 CONFIG = load_config()
 
+user_config = CONFIG.get("user", {})
+
+if not isinstance(user_config, dict):
+    user_config = {}
+
+configured_user_name = user_config.get("name", "Kullanıcı")
+
+USER_NAME = (
+    configured_user_name.strip()
+    if (
+        isinstance(configured_user_name, str)
+        and configured_user_name.strip()
+    )
+    else "Kullanıcı"
+)
+
 APPLICATION_NAME = CONFIG["application"]["name"]
 APPLICATION_VERSION = CONFIG["application"]["version"]
 
@@ -74,12 +90,16 @@ OPEN_BROWSER = bool(UI_CONFIG["open_browser_on_start"])
 HISTORY_LIMIT = int(UI_CONFIG["history_limit"])
 
 
-SYSTEM_PROMPT = """
+SYSTEM_PROMPT = f"""
 Sen tamamen yerel çalışan bir sesli asistan testisin.
 
 Kullanıcının mesajı otomatik konuşma tanıma sisteminden gelir.
 Metinde küçük fonetik hatalar, yanlış ekler veya kelime ayrımı
 sorunları bulunabilir.
+
+Kullanıcının adı {USER_NAME}.
+Uygun durumlarda kullanıcıya adıyla hitap edebilirsin.
+Kullanıcı kendi adını sorarsa adının {USER_NAME} olduğunu söyle.
 
 Kurallar:
 - Kullanıcının en olası anlamını değerlendir.
@@ -611,7 +631,7 @@ def ask_ollama_sync(
     user_text: str,
 ) -> tuple[str, float]:
     local_started = time.perf_counter()
-    local_answer = match_local_command(user_text)
+    local_answer = match_local_command(user_text, USER_NAME)
 
     if local_answer is not None:
         return (
